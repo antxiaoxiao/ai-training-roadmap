@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ant · 12-Month AI Training Brand Roadmap</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f5f3;
+    --bg3: #eeece6;
+    --text: #1a1a18;
+    --text2: #6b6a64;
+    --text3: #9a9890;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 2rem 1.5rem 3rem;
+    max-width: 860px;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  h1 { font-size: 20px; font-weight: 500; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: var(--text2); margin-bottom: 2rem; }
+
+  .phase-nav { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .pnav-btn {
+    padding: 5px 14px;
+    border-radius: var(--radius-md);
+    border: 0.5px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .pnav-btn.active { font-weight: 500; color: var(--text); background: var(--bg2); border-color: rgba(0,0,0,0.3); }
+  .pnav-btn:hover:not(.active) { background: var(--bg2); }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .hidden { display: none; }
+
+  .phase-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px; padding: 12px 16px;
+    border-radius: var(--radius-lg);
+    border: 0.5px solid;
+  }
+  .phase-num { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: var(--radius-md); }
+  .phase-title { font-size: 14px; font-weight: 500; flex: 1; }
+  .phase-months { font-size: 12px; }
+  .phase-goal { font-size: 12px; margin-top: 3px; }
+
+  .track-label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
+  .track-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+  .track-card {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: border-color .15s;
+  }
+  .track-card:hover { border-color: var(--border2); }
+  .track-card.expanded { border-color: rgba(0,0,0,0.35); }
+  .track-tag { font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: var(--radius-md); margin-bottom: 5px; display: inline-block; }
+  .track-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .track-items { font-size: 11px; color: var(--text2); line-height: 1.65; display: none; margin-top: 6px; padding-top: 6px; border-top: 0.5px solid var(--border); }
+  .track-card.expanded .track-items { display: block; }
+  .track-arrow { float: right; font-size: 10px; color: var(--text3); transition: transform .2s; }
+  .track-card.expanded .track-arrow { transform: rotate(180deg); }
+
+  .phase-block { margin-bottom: 1.5rem; }
+
+  .highlight-box {
+    background: var(--bg2);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text);
+    margin-top: 1rem;
+  }
+  .highlight-label { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; }
+
+  .divider { height: 0.5px; background: var(--border); margin: 1.25rem 0; }
+
+  .milestone-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
+  .milestone-row:last-child { border-bottom: none; }
+  .m-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .m-month { font-size: 11px; color: var(--text3); min-width: 36px; flex-shrink: 0; margin-top: 2px; }
+  .m-text { font-size: 12px; color: var(--text); }
+  .m-sub { font-size: 11px; color: var(--text2); }
+
+  @media (max-width: 600px) {
+    .track-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Ant · 12-Month AI Training Brand Roadmap</h1>
+<p class="subtitle">From internal company training → personal brand → external market</p>
+
+<div class="phase-nav">
+  <button class="pnav-btn active" onclick="showPhase('all')">All phases</button>
+  <button class="pnav-btn" onclick="showPhase('p1')">Phase 1 · M1–3</button>
+  <button class="pnav-btn" onclick="showPhase('p2')">Phase 2 · M4–6</button>
+  <button class="pnav-btn" onclick="showPhase('p3')">Phase 3 · M7–9</button>
+  <button class="pnav-btn" onclick="showPhase('p4')">Phase 4 · M10–12</button>
+  <button class="pnav-btn" onclick="showPhase('ms')">Milestones</button>
+</div>
+
+<div id="panel-all" class="panel active">
+  <div class="phase-block">
+    <div class="phase-header" style="background:#EEEDFE;border-color:#AFA9EC;">
+      <span class="phase-num" style="background:#CECBF6;color:#3C3489">Phase 1</span>
+      <div style="flex:1">
+        <div class="phase-title" style="color:#26215C;">Build internal trust, refine content</div>
+        <div class="phase-goal" style="color:#534AB7;">Goal: become the go-to AI workflow person inside your company, accumulate real cases</div>
+      </div>
+      <span class="phase-months" style="color:#534AB7;">Month 1–3</span>
+    </div>
+    <div class="track-label">Three parallel tracks</div>
+    <div class="track-grid" id="p1-all"></div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header" style="background:#E1F5EE;border-color:#5DCAA5;">
+      <span class="phase-num" style="background:#9FE1CB;color:#085041">Phase 2</span>
+      <div style="flex:1">
+        <div class="phase-title" style="color:#04342C;">Go public, build visibility</div>
+        <div class="phase-goal" style="color:#0F6E56;">Goal: start posting on LinkedIn, build first external audience, establish personal brand tag</div>
+      </div>
+      <span class="phase-months" style="color:#0F6E56;">Month 4–6</span>
+    </div>
+    <div class="track-grid" id="p2-all"></div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header" style="background:#FAECE7;border-color:#F0997B;">
+      <span class="phase-num" style="background:#F5C4B3;color:#712B13">Phase 3</span>
+      <div style="flex:1">
+        <div class="phase-title" style="color:#4A1B0C;">Deliver externally, validate market</div>
+        <div class="phase-goal" style="color:#993C1D;">Goal: first external paying client or partnership, validate training product viability</div>
+      </div>
+      <span class="phase-months" style="color:#993C1D;">Month 7–9</span>
+    </div>
+    <div class="track-grid" id="p3-all"></div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header" style="background:#FAEEDA;border-color:#EF9F27;">
+      <span class="phase-num" style="background:#FAC775;color:#633806">Phase 4</span>
+      <div style="flex:1">
+        <div class="phase-title" style="color:#412402;">Systematise, build brand assets</div>
+        <div class="phase-goal" style="color:#854F0B;">Goal: productise training, establish stable output and revenue stream</div>
+      </div>
+      <span class="phase-months" style="color:#854F0B;">Month 10–12</span>
+    </div>
+    <div class="track-grid" id="p4-all"></div>
+  </div>
+</div>
+
+<div id="panel-p1" class="panel hidden">
+  <div class="phase-header" style="background:#EEEDFE;border-color:#AFA9EC;margin-bottom:1rem;">
+    <span class="phase-num" style="background:#CECBF6;color:#3C3489">Phase 1 · Month 1–3</span>
+    <div class="phase-title" style="color:#26215C;">Build internal trust, refine content</div>
+  </div>
+  <div class="track-grid" id="p1-detail"></div>
+  <div class="divider"></div>
+  <div class="highlight-label">The one most important thing this phase</div>
+  <div class="highlight-box">Take the DeLaval project workflow — auditing the design system with Claude + Figma MCP — and document it with screenshots and time-saved data. This is the first cornerstone of your entire brand.</div>
+</div>
+
+<div id="panel-p2" class="panel hidden">
+  <div class="phase-header" style="background:#E1F5EE;border-color:#5DCAA5;margin-bottom:1rem;">
+    <span class="phase-num" style="background:#9FE1CB;color:#085041">Phase 2 · Month 4–6</span>
+    <div class="phase-title" style="color:#04342C;">Go public, build visibility</div>
+  </div>
+  <div class="track-grid" id="p2-detail"></div>
+  <div class="divider"></div>
+  <div class="highlight-label">The one most important thing this phase</div>
+  <div class="highlight-box">Publish your first bilingual LinkedIn post: "How I used AI to cut a 2-hour design system audit down to 10 minutes." Use real numbers — that's what makes it shareable.</div>
+</div>
+
+<div id="panel-p3" class="panel hidden">
+  <div class="phase-header" style="background:#FAECE7;border-color:#F0997B;margin-bottom:1rem;">
+    <span class="phase-num" style="background:#F5C4B3;color:#712B13">Phase 3 · Month 7–9</span>
+    <div class="phase-title" style="color:#4A1B0C;">Deliver externally, validate market</div>
+  </div>
+  <div class="track-grid" id="p3-detail"></div>
+  <div class="divider"></div>
+  <div class="highlight-label">The one most important thing this phase</div>
+  <div class="highlight-box">Run your first external workshop — even if it's free. Actually delivering once teaches you more than three more months of preparation. Real feedback is the asset.</div>
+</div>
+
+<div id="panel-p4" class="panel hidden">
+  <div class="phase-header" style="background:#FAEEDA;border-color:#EF9F27;margin-bottom:1rem;">
+    <span class="phase-num" style="background:#FAC775;color:#633806">Phase 4 · Month 10–12</span>
+    <div class="phase-title" style="color:#412402;">Systematise, build brand assets</div>
+  </div>
+  <div class="track-grid" id="p4-detail"></div>
+  <div class="divider"></div>
+  <div class="highlight-label">The one most important thing this phase</div>
+  <div class="highlight-box">Record your most popular training module as a video course and publish it on Gumroad or Maven. This is the shift from trading time for money to content generating income.</div>
+</div>
+
+<div id="panel-ms" class="panel hidden">
+  <div class="track-label">12 key milestones</div>
+  <div id="ms-list"></div>
+</div>
+
+<script>
+const tracks = {
+  p1:[
+    {tag:"Internal",tagBg:"#EEEDFE",tagColor:"#3C3489",name:"First designer training session",items:"· Recruit 3–5 designer colleagues\n· Topic: AI prompting + Claude daily use\n· Collect feedback, iterate content"},
+    {tag:"Cases",tagBg:"#EEEDFE",tagColor:"#3C3489",name:"Document DeLaval real-world case",items:"· Screenshots of Claude + Figma MCP\n· Record time saved with real numbers\n· Write up as an internal sharing doc"},
+    {tag:"Learning",tagBg:"#EEEDFE",tagColor:"#3C3489",name:"Build personal AI experiment log",items:"· Track weekly AI tool experiments in Notion\n· Build prompt template library\n· Monthly summary of tool updates"}
+  ],
+  p2:[
+    {tag:"Content",tagBg:"#E1F5EE",tagColor:"#085041",name:"Launch LinkedIn content",items:"· Post every 2 weeks\n· Bilingual EN/CN, two markets\n· Topic: real designer AI workflow cases"},
+    {tag:"Product",tagBg:"#E1F5EE",tagColor:"#085041",name:"Standardise training materials",items:"· Package first session into reusable templates\n· Create prompt template pack\n· Prepare external workshop version"},
+    {tag:"Network",tagBg:"#E1F5EE",tagColor:"#085041",name:"Expand internal influence",items:"· Pitch to all-staff training coordinator\n· Get formal internal training authorisation\n· Talk to other roles to understand needs"}
+  ],
+  p3:[
+    {tag:"Delivery",tagBg:"#FAECE7",tagColor:"#712B13",name:"First external workshop",items:"· Target: designer audience\n· Format: 2-hour online workshop\n· Free or low-cost first, collect real feedback"},
+    {tag:"All-staff",tagBg:"#FAECE7",tagColor:"#712B13",name:"Company all-staff training Phase 1",items:"· Topic: Teams/Outlook + AI\n· Cover non-design roles\n· Co-drive with HR or management"},
+    {tag:"Brand",tagBg:"#FAECE7",tagColor:"#712B13",name:"Build personal website or landing page",items:"· Show training services + case studies\n· Contact info and booking link\n· Can be built fast with Notion or Framer"}
+  ],
+  p4:[
+    {tag:"Productise",tagBg:"#FAEEDA",tagColor:"#633806",name:"Record online course",items:"· Film most popular module as video\n· Publish on Gumroad or Maven\n· Pricing: €49–199 range"},
+    {tag:"Scale",tagBg:"#FAEEDA",tagColor:"#633806",name:"Sell training to external clients",items:"· Reach out to 2–3 consulting firms\n· Package: half-day workshop + template pack\n· Use LinkedIn content for inbound leads"},
+    {tag:"Ecosystem",tagBg:"#FAEEDA",tagColor:"#633806",name:"Build partnerships and testimonials",items:"· Look for AI tool brand collaboration\n· Collect learner case studies and quotes\n· Consider speaking at design community events"}
+  ]
+};
+
+const milestones = [
+  {month:"M1",dot:"#7F77DD",text:"Complete first internal designer AI training",sub:"3–5 people, collect written feedback"},
+  {month:"M2",dot:"#7F77DD",text:"DeLaval MCP case document completed",sub:"With screenshots, time data, and workflow steps"},
+  {month:"M3",dot:"#7F77DD",text:"Personal AI experiment Notion knowledge base live",sub:"Including first version of prompt template library"},
+  {month:"M4",dot:"#1D9E75",text:"Publish first LinkedIn article",sub:"Bilingual EN/CN — topic: Figma MCP workflow"},
+  {month:"M5",dot:"#1D9E75",text:"Submit all-staff training proposal to company",sub:"Get management support and formal authorisation"},
+  {month:"M6",dot:"#1D9E75",text:"Training materials v1.0 complete",sub:"One set for designers, one general version"},
+  {month:"M7",dot:"#D85A30",text:"First external workshop delivered",sub:"Online, designer audience, iterate from feedback"},
+  {month:"M8",dot:"#D85A30",text:"Company all-staff training Phase 1 complete",sub:"Covering non-design roles, co-driven with HR"},
+  {month:"M9",dot:"#D85A30",text:"Personal training website or landing page live",sub:"Services, case studies, and booking link"},
+  {month:"M10",dot:"#BA7517",text:"First online course published",sub:"Gumroad or Maven, €49–199 pricing"},
+  {month:"M11",dot:"#BA7517",text:"First external paying client signed",sub:"Workshop or corporate training contract"},
+  {month:"M12",dot:"#BA7517",text:"Annual review complete, next year plan drafted",sub:"Revenue target, brand direction, product line roadmap"}
+];
+
+function buildTracks(data, containerId) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = '';
+  data.forEach(t => {
+    const d = document.createElement('div');
+    d.className = 'track-card';
+    d.innerHTML = `<span class="track-arrow">▾</span><span class="track-tag" style="background:${t.tagBg};color:${t.tagColor}">${t.tag}</span><div class="track-name">${t.name}</div><div class="track-items">${t.items.replace(/\n/g,'<br>')}</div>`;
+    d.onclick = () => d.classList.toggle('expanded');
+    c.appendChild(d);
+  });
+}
+
+function buildMilestones() {
+  const c = document.getElementById('ms-list');
+  milestones.forEach(m => {
+    const d = document.createElement('div');
+    d.className = 'milestone-row';
+    d.innerHTML = `<div class="m-dot" style="background:${m.dot}"></div><span class="m-month">${m.month}</span><div><div class="m-text">${m.text}</div><div class="m-sub">${m.sub}</div></div>`;
+    c.appendChild(d);
+  });
+}
+
+function showPhase(id) {
+  const ids = ['all','p1','p2','p3','p4','ms'];
+  document.querySelectorAll('.pnav-btn').forEach((b,i) => {
+    b.classList.toggle('active', ids[i] === id);
+    if (ids[i] === id) {
+      b.style.background = '#f0efea';
+      b.style.color = '#1a1a18';
+    } else {
+      b.style.background = '';
+      b.style.color = '';
+    }
+  });
+  ids.forEach(v => {
+    const el = document.getElementById('panel-' + v);
+    if (el) {
+      el.classList.remove('active');
+      el.classList.add('hidden');
+    }
+  });
+  const active = document.getElementById('panel-' + id);
+  if (active) {
+    active.classList.remove('hidden');
+    active.classList.add('active');
+  }
+}
+
+buildTracks(tracks.p1, 'p1-all');
+buildTracks(tracks.p2, 'p2-all');
+buildTracks(tracks.p3, 'p3-all');
+buildTracks(tracks.p4, 'p4-all');
+buildTracks(tracks.p1, 'p1-detail');
+buildTracks(tracks.p2, 'p2-detail');
+buildTracks(tracks.p3, 'p3-detail');
+buildTracks(tracks.p4, 'p4-detail');
+buildMilestones();
+</script>
+</body>
+</html>
